@@ -161,11 +161,12 @@ function initMap() {
     }
   ]
 
-  var myLatlng1 = new google.maps.LatLng(53.65914, 0.072050);
+  var clearVoice = new google.maps.LatLng(33.594656, -111.979280);
 
+  // Map Options
   var mapOptions = {
     zoom: 12,
-    center: myLatlng1,
+    center: clearVoice,
     mapTypeControlOptions: {
         mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
       },
@@ -175,10 +176,10 @@ function initMap() {
   // Google Map
   var map = new google.maps.Map(document.getElementById('map'), mapOptions);
 
+  // Custom Style Map
   var styledMapOptions = {
       name: 'Custom Style'
   };
-
   var customMapType = new google.maps.StyledMapType(features, styledMapOptions);
   map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
 
