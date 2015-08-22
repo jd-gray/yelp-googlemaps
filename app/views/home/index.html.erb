@@ -1,2 +1,18 @@
 <h1>Home Page</h1>
 <div id="map"></div>
+
+<h2>Yelp Search</h2>
+<%= form_for root_path, method: :get do %>
+  <%= text_field_tag(:term, nil, placeholder: 'Business') %>
+  <%= text_field_tag(:city, nil, placeholder: 'City') %>
+  <%= submit_tag 'Submit', name: nil %>
+<% end %>
+
+<% @response.businesses.each do |business| %>
+  <%= image_tag business.image_url %>
+  <%= business.rating %>
+  <%= image_tag business.rating_img_url %>
+  <%= business.name %>
+  <%= business.url %>
+  <%= business.phone %>
+<% end %>
