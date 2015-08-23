@@ -16,10 +16,15 @@
 //= require masonry/jquery.masonry
 //= require_tree .
 
+// Google Map
 var map;
+var marker;
 var MY_MAPTYPE_ID = 'custom_style';
 
 function initMap() {
+
+  // Boundary variable
+  var bounds = new google.maps.LatLngBounds();
 
   // Map Style
   var features = [
@@ -161,11 +166,12 @@ function initMap() {
     }
   ]
 
+  // Start location variable
   var clearVoice = new google.maps.LatLng(33.594656, -111.979280);
 
   // Map Options
   var mapOptions = {
-    zoom: 12,
+    zoom: 10,
     center: clearVoice,
     scrollwheel: false,
     mapTypeControlOptions: {
@@ -185,10 +191,43 @@ function initMap() {
   map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
 
   // Current User Location
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      map.setCenter(initialLocation);
+  // if (navigator.geolocation) {
+  //   navigator.geolocation.getCurrentPosition(function (position) {
+  //     initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  //     map.setCenter(initialLocation);
+  //   });
+  // }
+
+  // Ruby Hash to JS Array
+  var yelpArray = gon.yelp_hash.businesses;
+
+  // Setup information window
+  var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+  // Loop through array to pull out needed values
+  for (var i = 0; i < yelpArray.length; i++) {
+    // Marker variables
+    var lat = yelpArray[i].location.coordinate.latitude;
+    var lon = yelpArray[i].location.coordinate.longitude;
+    var positionMarker = new google.maps.LatLng(lat, lon);
+    bounds.extend(positionMarker);
+
+    // Marker setup
+    marker = new google.maps.Marker({
+        map: map,
+        position: positionMarker,
+        animation: google.maps.Animation.DROP
     });
+
+    // Display Information in Box
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+    return function() {
+        infoWindow.setContent(yelpArray[i].name);
+        infoWindow.open(map, marker);
+      }
+    })(marker, i));
+
+    // Map fits around markers
+    map.fitBounds(bounds);
   }
 }
