@@ -1,0 +1,19 @@
+%nav.navbar.navbar-default
+  .container-fluid
+    .navbar-header.navbar-right
+      .navbar-brand
+        = link_to image_tag('powered.png'), 'https://www.yelp.com', target: '_blank'
+      %button.navbar-toggle.collapsed{"type"=>"button", "data-toggle"=>"collapse", "data-target"=>"#bs-example-navbar-collapse-1"}
+        %span.sr-only= "Toggle navigation"
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+    .collapse.navbar-collapse#bs-example-navbar-collapse-1
+      %ul.nav.navbar-nav.navbar-left
+        %li.dropdown
+          %form.search.navbar-form.navbar-left{:role => "search"}
+            .form-group
+              = form_for root_path, method: :get do
+                = text_field_tag(:term, nil, placeholder: 'Sushi, Hamburgers')
+                = text_field_tag(:city, nil, placeholder: 'Huntington Beach, CA')
+                = submit_tag 'Search', name: nil, class: 'btn btn-primary fa-search', id: 'submit-button'

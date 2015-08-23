@@ -13,6 +13,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'figaro'
 gem 'yelp', require: 'yelp'
 gem 'bootstrap-sass', '~> 3.3.5'
+gem 'haml-rails', '~> 0.9'
+gem 'masonry-rails'
 
 group :development, :test do
   gem 'byebug'
