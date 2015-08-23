@@ -17,9 +17,13 @@
 //= require_tree .
 
 var map;
+var marker;
 var MY_MAPTYPE_ID = 'custom_style';
 
 function initMap() {
+
+  // Boundary variable
+  var bounds = new google.maps.LatLngBounds();
 
   // Map Style
   var features = [
@@ -161,11 +165,12 @@ function initMap() {
     }
   ]
 
+  // Start location variable
   var clearVoice = new google.maps.LatLng(33.594656, -111.979280);
 
   // Map Options
   var mapOptions = {
-    zoom: 12,
+    zoom: 10,
     center: clearVoice,
     scrollwheel: false,
     mapTypeControlOptions: {
@@ -185,10 +190,27 @@ function initMap() {
   map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
 
   // Current User Location
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function (position) {
-      initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-      map.setCenter(initialLocation);
+  // if (navigator.geolocation) {
+  //   navigator.geolocation.getCurrentPosition(function (position) {
+  //     initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+  //     map.setCenter(initialLocation);
+  //   });
+  // }
+
+  var yelpArray = gon.yelp_hash.businesses;
+  for (var i = 0; i < yelpArray.length; i++) {
+    var lat = yelpArray[i].location.coordinate.latitude;
+    var lon = yelpArray[i].location.coordinate.longitude;
+    var positionMarker = new google.maps.LatLng(lat, lon);
+    bounds.extend(positionMarker);
+    marker = new google.maps.Marker({
+        map: map,
+        position: positionMarker
     });
+    map.fitBounds(bounds);
   }
+
+
 }
+
+
