@@ -2,7 +2,7 @@
   .container-fluid
     .navbar-header.navbar-right
       .navbar-brand
-        = image_tag 'powered.png'
+        = link_to image_tag('powered.png'), 'https://www.yelp.com', target: '_blank'
       %button.navbar-toggle.collapsed{"type"=>"button", "data-toggle"=>"collapse", "data-target"=>"#bs-example-navbar-collapse-1"}
         %span.sr-only= "Toggle navigation"
         %span.icon-bar
