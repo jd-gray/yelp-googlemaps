@@ -197,20 +197,37 @@ function initMap() {
   //   });
   // }
 
+  // Ruby Hash to JS Array
   var yelpArray = gon.yelp_hash.businesses;
+
+  // Setup information window
+  var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+  // Loop through array to pull out needed values
   for (var i = 0; i < yelpArray.length; i++) {
+    // Marker variables
     var lat = yelpArray[i].location.coordinate.latitude;
     var lon = yelpArray[i].location.coordinate.longitude;
     var positionMarker = new google.maps.LatLng(lat, lon);
     bounds.extend(positionMarker);
+
+    // Marker setup
     marker = new google.maps.Marker({
         map: map,
-        position: positionMarker
+        position: positionMarker,
+        animation: google.maps.Animation.DROP,
+        title: yelpArray[i].name
     });
+
+    // Display Information in Box
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+    return function() {
+        infoWindow.setContent(yelpArray[i].name);
+        infoWindow.open(map, marker);
+      }
+    })(marker, i));
+
+    // Map fits around markers
     map.fitBounds(bounds);
   }
-
-
 }
-
-
