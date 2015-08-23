@@ -16,6 +16,7 @@
 //= require masonry/jquery.masonry
 //= require_tree .
 
+// Google Map
 var map;
 var marker;
 var MY_MAPTYPE_ID = 'custom_style';
@@ -215,8 +216,7 @@ function initMap() {
     marker = new google.maps.Marker({
         map: map,
         position: positionMarker,
-        animation: google.maps.Animation.DROP,
-        title: yelpArray[i].name
+        animation: google.maps.Animation.DROP
     });
 
     // Display Information in Box
