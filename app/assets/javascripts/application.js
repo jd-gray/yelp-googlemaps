@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap-sprockets
-//= require turbolinks
+//= require masonry/jquery.masonry
 //= require_tree .
 
 var map;
@@ -167,6 +167,7 @@ function initMap() {
   var mapOptions = {
     zoom: 12,
     center: clearVoice,
+    scrollwheel: false,
     mapTypeControlOptions: {
         mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
       },

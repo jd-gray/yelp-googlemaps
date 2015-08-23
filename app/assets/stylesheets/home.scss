@@ -1,5 +1,69 @@
+$main-color: #34495e;
+$gray: #BDC3C7;
+
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+// Navbar
+nav.navbar.navbar-default {
+  margin: 0;
+  background-color: $main-color;
+  border: none;
+  border-radius: 0;
+
+  #submit-button {
+    background-color: $gray;
+    border-color: $gray;
+    padding: 1px;
+    width: 60px;
+    margin-top: -2px;
+  }
+
+  form {
+    margin-top: 15px;
+  }
+
+  input {
+    width: 200px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    height: 24px;
+  }
+}
+
+// Google Map
 #map {
   height: 500px;
   width: 100%;
   margin: 0 auto;
+  border-bottom: 5px solid $main-color;
+  margin-bottom: 25px;
+}
+
+// Yelp Responses
+#response.transitions-enabled {
+  margin: 0 auto;
+  width: 300px;
+  .box.panel.panel-default.masonry-brick{
+    border: none;
+    border-radius: 0;
+    border: 1px solid $main-color;
+    border-radius: 5px;
+
+    .panel-heading {
+      background-color: $main-color;
+      color: white;
+    }
+  }
+  .box {
+    margin: 2px;
+    width: 300px;
+    text-align: center;
+    overflow: hidden;
+    img {
+      text-align: center;
+    }
+  }
 }

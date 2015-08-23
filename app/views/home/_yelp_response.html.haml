@@ -1,0 +1,10 @@
+#response.transitions-enabled
+  - @response.businesses.each do |business|
+    .box.panel.panel-default
+      .panel-heading
+        %h5= business.name
+      .panel-body
+        %p= image_tag business.image_url
+        %p= image_tag business.rating_img_url
+        %p= business.url
+        %p= business.phone
