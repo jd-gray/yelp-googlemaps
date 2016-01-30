@@ -31,7 +31,8 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
-  gem 'simplecov', :require => false
+  gem 'simplecov', require: false
+  gem "codeclimate-test-reporter", require: nil
 end
 
 group :development do
