@@ -16,8 +16,6 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem 'haml-rails', '~> 0.9'
 gem 'masonry-rails'
 gem 'gon', '~> 6.0.1'
-gem 'webmock'
-gem 'vcr', '~> 3.0', '>= 3.0.1'
 
 group :development, :test do
   gem 'byebug'
@@ -33,6 +31,8 @@ group :test do
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
   gem "codeclimate-test-reporter", require: nil
+  gem 'webmock'
+  gem 'vcr', '~> 3.0', '>= 3.0.1'
 end
 
 group :development do
