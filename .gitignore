@@ -20,7 +20,7 @@
 /config/application.yml
 
 # Ignore simplecov
-coverage
+/coverage
 
 # Ignore VCR Cassettes
-fixtures
+/fixtures
