@@ -7,36 +7,44 @@ feature 'Search', js: true do
   end
 
   scenario 'Successful search with city' do
-    fill_in 'term', with: 'Sushi'
-    fill_in 'city', with: 'Huntington Beach, CA'
-    click_button 'Search'
+    VCR.use_cassette("yelp search", :record => :new_episodes) do
+      fill_in 'term', with: 'Sushi'
+      fill_in 'city', with: 'Huntington Beach, CA'
+      click_button 'Search'
 
-    expect(page).to have_content 'Sushi On Fire'
-    expect(page).to have_content 'Matsu Restaurant'
+      expect(page).to have_content 'Sushi On Fire'
+      expect(page).to have_content 'Matsu Restaurant'
+    end
   end
 
   scenario 'Successful search with zip code' do
-    fill_in 'term', with: 'Sushi'
-    fill_in 'city', with: '92647'
-    click_button 'Search'
+    VCR.use_cassette("yelp search", :record => :new_episodes) do
+      fill_in 'term', with: 'Sushi'
+      fill_in 'city', with: '92647'
+      click_button 'Search'
 
-    expect(page).to have_content 'Sushi On Fire'
-    expect(page).to have_content 'Matsu Restaurant'
+      expect(page).to have_content 'Sushi On Fire'
+      expect(page).to have_content 'Matsu Restaurant'
+    end
   end
 
   scenario 'Unsuccessful search with no result' do
-    fill_in 'term', with: 'dsfdsfsdf'
-    fill_in 'city', with: 'erewrbfgdf'
-    click_button 'Search'
+    VCR.use_cassette("unsuccessful yelp search", :record => :new_episodes) do
+      fill_in 'term', with: 'dsfdsfsdf'
+      fill_in 'city', with: 'erewrbfgdf'
+      click_button 'Search'
 
-    expect(page).to_not have_content 'Sushi On Fire'
-    expect(page).to_not have_content 'Matsu Restaurant'
+      expect(page).to_not have_content 'Sushi On Fire'
+      expect(page).to_not have_content 'Matsu Restaurant'
+    end
   end
 
   scenario 'Unsuccessful search with no parameters' do
-    click_button 'Search'
+    VCR.use_cassette("unsuccessful yelp search", :record => :new_episodes) do
+      click_button 'Search'
 
-    expect(page).to_not have_content 'Sushi On Fire'
-    expect(page).to_not have_content 'Matsu Restaurant'
+      expect(page).to_not have_content 'Sushi On Fire'
+      expect(page).to_not have_content 'Matsu Restaurant'
+    end
   end
 end
